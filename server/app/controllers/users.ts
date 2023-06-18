@@ -1,4 +1,5 @@
-import bycript from 'bcrypt';
+import bcrypt from 'bcrypt';
+import { Op } from 'sequelize';
 import User from '../models/User';
 import { Request, Response } from 'express';
 
@@ -18,12 +19,12 @@ export const getAllUsers = async (req: Request, res: Response) => {
 //Description: Register users
 export const registerUser = async (req: Request, res: Response) => {
   try {
-    const { username, name, email, password } = req.body;
+    const { username, fname, email, password } = req.body;
 
     //check if user/email are unique to DB
     const existingUser = await User.findOne({
       where: {
-        $or: [{ username }, { email }],
+        [Op.or]: [{ username }, { email }],
       },
     });
 
@@ -34,12 +35,12 @@ export const registerUser = async (req: Request, res: Response) => {
     }
 
     //hash password
-    const hashedPassword = await bycript.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     //create user
     const newUser = await User.create({
-      username,
-      fname: name,
+      username: username,
+      fname,
       email,
       password: hashedPassword,
       created_on: new Date(),
