@@ -1,7 +1,9 @@
 import { DataTypes } from 'sequelize';
+import bcrypt from 'bcrypt';
 import sequelize from '../../config/database';
+import { UserInstance } from '../../types/User';
 
-const User = sequelize.define(
+const User = sequelize.define<UserInstance>(
   'users',
   {
     user_id: {
@@ -41,5 +43,9 @@ const User = sequelize.define(
   },
   { timestamps: false }
 );
+
+User.prototype.isValidPassword = async function (password: string) {
+  return await bcrypt.compare(password, this.password);
+};
 
 export default User;
