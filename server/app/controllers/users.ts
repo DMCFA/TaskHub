@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
-import User from '../models/User';
 import { Request, Response } from 'express';
+import User from '../models/User';
 import { generateToken } from '../../utils/tokenUtils';
 import { UserAttributes, UserInstance } from '../../types/User';
 
@@ -9,7 +9,7 @@ import { UserAttributes, UserInstance } from '../../types/User';
 //Description: Get all users
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({ attributes: { exclude: ['password'] } });
     return res.status(200).json(users);
   } catch (error) {
     console.error('Error in getting all users', error);
