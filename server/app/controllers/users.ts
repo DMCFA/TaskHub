@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 import { Request, Response } from 'express';
 import User from '../models/User';
-import { generateToken } from '../../utils/tokenUtils';
+import { generateToken, sessionExpirationDate } from '../../utils/tokenUtils';
 import { UserAttributes, UserInstance } from '../../types/User';
 
 //GET api/users
@@ -78,7 +78,12 @@ export const registerUser = async (req: Request, res: Response) => {
     //update login time
     await newUser.update({ last_login: new Date() });
 
-    return res.status(201).json(newUser);
+    res.cookie('auth_token', token, {
+      expires: sessionExpirationDate(),
+      httpOnly: true,
+    });
+
+    return res.status(201).json({ newUser, token });
   } catch (error) {
     console.error('Error in user registration', error);
     return res.status(500).json({ error: 'Internal server error' });
@@ -108,6 +113,12 @@ export const loginUser = async (req: Request, res: Response) => {
 
     // Update last login timestamp
     await user.update({ last_login: new Date() });
+
+    //add session cookie
+    res.cookie('auth_token', token, {
+      expires: sessionExpirationDate(),
+      httpOnly: true,
+    });
 
     res.status(200).json({ user, token });
   } catch (error) {
