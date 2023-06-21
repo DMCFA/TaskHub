@@ -40,6 +40,10 @@ const User = sequelize.define<UserInstance>(
     last_login: {
       type: DataTypes.DATE,
     },
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   },
   { timestamps: false }
 );

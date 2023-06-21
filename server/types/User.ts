@@ -8,8 +8,10 @@ export interface UserAttributes {
   password: string;
   created_on: Date;
   last_login: Date | null;
+  is_admin: boolean;
 }
 
 export interface UserInstance extends Model<UserAttributes>, UserAttributes {
   isValidPassword: (password: string) => boolean;
+  token: string;
 }
