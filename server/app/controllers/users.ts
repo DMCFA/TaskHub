@@ -70,6 +70,7 @@ export const registerUser = async (req: Request, res: Response) => {
     } as UserAttributes);
 
     const userInstance = newUser as UserInstance;
+    const { password: excludePassword, ...userRes } = newUser.toJSON();
 
     //generate session token
     const { user_id } = userInstance;
@@ -83,7 +84,7 @@ export const registerUser = async (req: Request, res: Response) => {
       httpOnly: true,
     });
 
-    return res.status(201).json({ newUser, token });
+    return res.status(201).json({ newUser: userRes, token });
   } catch (error) {
     console.error('Error in user registration', error);
     return res.status(500).json({ error: 'Internal server error' });
@@ -114,13 +115,16 @@ export const loginUser = async (req: Request, res: Response) => {
     // Update last login timestamp
     await user.update({ last_login: new Date() });
 
+    //remove password from response
+    const { password: excludePassword, ...userRes } = user.toJSON();
+
     //add session cookie
     res.cookie('access_token', token, {
       expires: sessionExpirationDate(),
       httpOnly: true,
     });
 
-    res.status(200).json({ user, token });
+    res.status(200).json({ user: userRes, token });
   } catch (error) {
     res.status(500).json({ error: 'Error logging in' });
   }
