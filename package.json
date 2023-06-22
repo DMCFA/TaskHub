@@ -1,1 +1,12 @@
-{}
+{
+  "scripts": {
+    "dev": "concurrently \"cd client && npm run dev\" \"cd server && npm run dev\"",
+    "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
+    "start": "concurrently \"cd client && npm run start\" \"cd server && npm run start\"",
+    "lint": "cd client && npm run lint",
+    "test": "concurrently \"cd client && npm run test\" \"cd server && npm run test\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
