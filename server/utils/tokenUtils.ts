@@ -17,7 +17,7 @@ const convertExpirationTime = () => {
 //generate token
 export const generateToken = (userId: number) => {
   const payload = {
-    userId: userId,
+    user_id: userId,
   };
 
   const token = jwt.sign(payload, String(process.env.JWT_KEY), {
@@ -27,6 +27,18 @@ export const generateToken = (userId: number) => {
   return token;
 };
 
+//verify token
+export const verifyToken = (token: string) => {
+  try {
+    const encodedToken = token.replace('Bearer ', '');
+    const decodedToken = jwt.verify(encodedToken, String(process.env.JWT_KEY));
+    return decodedToken;
+  } catch (error) {
+    throw new Error('invalid token');
+  }
+};
+
+//convert expiration time to date type
 export const sessionExpirationDate = () => {
   const numOfDays = convertExpirationTime();
   const expirationDate = new Date();
