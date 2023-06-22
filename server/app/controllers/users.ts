@@ -155,3 +155,42 @@ export const updateUser = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Error updating user' });
   }
 };
+
+//DELETE api/users/:id
+//Description: Delete user from DB
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const loggedInUser = req.user;
+
+    console.log(req.params);
+    console.log(loggedInUser);
+
+    if (!loggedInUser) {
+      return res.status(401).json({ error: 'Unauthorized access' });
+    }
+
+    // Check if the user performing the deletion is the same user or an admin
+
+    const user = await User.findOne({
+      where: { user_id: loggedInUser.user_id },
+    });
+
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized access' });
+    }
+
+    if (user.user_id !== Number(id) && !user.is_admin) {
+      return res.status(403).json({ error: 'Access denied' });
+    }
+
+    //delete user from DB
+
+    await user.destroy();
+
+    return res.status(204).end();
+  } catch (error) {
+    console.error('Error deleting user', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
