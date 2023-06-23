@@ -1,1 +1,10 @@
+@import '../styles/core/common';
+
+// Core
+@import '../styles/core/styleguide';
 @import '../styles/core/base';
+@import '../styles/core/typography';
+@import '../styles/core/mixin';
+
+//Pages
+@import '../styles/pages/welcome';
