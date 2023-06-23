@@ -1,0 +1,27 @@
+@mixin container {
+  max-width: 120rem;
+  padding: 0 3rem;
+  margin: 0 auto;
+}
+
+@mixin main-button($bg) {
+  @include body-text-style;
+  all: unset;
+  font-size: 1.6rem;
+  width: 100%;
+  background-color: $bg;
+  color: $color--black-body;
+  font-weight: 600;
+  padding: 1.2rem;
+  border-radius: 0.5rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  text-align: center;
+
+  &:hover {
+    background-color: $color--secondary;
+    color: $color--white;
+    transition: all 0.3s ease-out;
+  }
+}
