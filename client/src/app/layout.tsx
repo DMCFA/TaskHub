@@ -2,10 +2,11 @@
 
 import './styles.scss';
 import { Roboto } from 'next/font/google';
-import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
-import Navbar from './navigation/Navbar';
-import { CustomThemeProvider } from './navigation/ThemeContext';
+import Navbar from './components/Nav/Navbar';
+import { CustomThemeProvider } from '../utils/ThemeContext';
+import { user } from '../store/mock';
+import Welcome from './pages/welcome';
 
 const roboto = Roboto({ weight: '400', subsets: ['latin'] });
 
@@ -27,12 +28,18 @@ export default function RootLayout({
     <CustomThemeProvider>
       <CssBaseline />
       <html lang='en'>
-        <body className={roboto.className}>
-          <header>
-            <Navbar />
-          </header>
-          {children}
-        </body>
+        {user ? (
+          <body className={roboto.className}>
+            <header>
+              <Navbar />
+            </header>
+            {children}
+          </body>
+        ) : (
+          <body className={roboto.className}>
+            <Welcome />
+          </body>
+        )}
       </html>
     </CustomThemeProvider>
   );
