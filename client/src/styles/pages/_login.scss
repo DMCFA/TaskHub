@@ -1,0 +1,56 @@
+.login {
+  &__container {
+    @include container;
+    @include flex;
+    gap: 5rem;
+    margin-block-start: 5rem;
+  }
+
+  &__form {
+    & > * {
+      margin-block-start: 2rem;
+    }
+  }
+
+  #user-login-label,
+  #user-password-label {
+    font-size: 1.4rem;
+  }
+
+  &__btn-container {
+    margin-bottom: 2.5rem;
+  }
+
+  &__btn {
+    @include main-button($color--btn-yellow);
+    padding-inline: 0;
+  }
+
+  &__link {
+    font-size: 1.6rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__alt-options {
+    width: 100%;
+
+    button {
+      @include main-button($color--white);
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+      padding-inline: 0;
+      margin-block-end: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > svg {
+        margin-inline-end: 1rem;
+        height: auto;
+      }
+    }
+  }
+}
