@@ -1,15 +1,14 @@
 .welcome {
   &__container {
     @include container;
+    @include flex;
     min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
   &__img {
     width: 100%;
+    height: auto;
+    max-height: 30rem;
   }
 
   &__message {
