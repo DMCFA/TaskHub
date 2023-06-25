@@ -3,10 +3,29 @@
 import { FormControl, Divider, Tooltip, Box, TextField } from '@mui/material';
 import { GrGoogle, GrFacebook, GrApple } from 'react-icons/gr';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Login() {
   return (
     <section className='login'>
+      <div className='login__web-image-container'>
+        <Image
+          src='/img/home-pattern.jpg'
+          className='login__web-image login__pattern'
+          priority
+          width={400}
+          height={700}
+          alt=''
+        />
+        <Image
+          src='/img/logo-no-background.svg'
+          className='login__web-image login__logo'
+          priority
+          width={300}
+          height={300}
+          alt='company logo'
+        />
+      </div>
       <div className='login__container'>
         <h1>Welcome back</h1>
         <div className='login__form-container'>
