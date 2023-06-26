@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import { limiter } from './config/express';
@@ -10,6 +11,7 @@ const app = express();
 const port = process.env.PORT || 3003;
 
 //middlewares
+app.use(cors);
 app.use('/api', limiter);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
