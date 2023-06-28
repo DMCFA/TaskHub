@@ -15,6 +15,10 @@
   }
 
   &__form {
+    > :nth-child(2) {
+      margin-block-start: 2rem;
+    }
+
     & > * {
       margin-block-start: 2rem;
     }
@@ -60,6 +64,10 @@
         height: auto;
       }
     }
+  }
+
+  &__loading {
+    @include loader;
   }
 }
 
