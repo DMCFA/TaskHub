@@ -5,6 +5,19 @@
   }
 }
 
+.MuiFormHelperText-root {
+  font-size: 1rem;
+}
+
+.input--success {
+  .MuiInputBase-root,
+  .Mui-focused {
+    .MuiOutlinedInput-notchedOutline {
+      border-color: green !important;
+    }
+  }
+}
+
 @include media('>=screen-md') {
   .MuiFormControl-root {
     > label,
