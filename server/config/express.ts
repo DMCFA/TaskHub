@@ -6,3 +6,8 @@ export const limiter = rateLimit({
   message:
     'Too many requests sent from this IP, please try again after a minute',
 });
+
+export const corsOptions = {
+  origin: ['http://localhost:3000', 'http://localhost:10533'],
+  credentials: true,
+};
