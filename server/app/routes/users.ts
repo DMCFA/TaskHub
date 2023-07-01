@@ -4,6 +4,7 @@ import {
   getAllUsers,
   getUserById,
   loginUser,
+  logoutUser,
   registerUser,
   updateUser,
 } from '../controllers/users';
@@ -15,6 +16,7 @@ userRouter.get('/', getAllUsers);
 userRouter.get('/:id', getUserById);
 userRouter.post('/register', registerUser);
 userRouter.post('/login', loginUser);
+userRouter.post('/logout', logoutUser);
 userRouter.put('/:id', authenticateUser, updateUser);
 userRouter.delete('/:id', authenticateUser, deleteUser);
 

@@ -130,6 +130,18 @@ export const loginUser = async (req: Request, res: Response) => {
   }
 };
 
+//POST api/users/logout
+//Description: Logout user
+export const logoutUser = async (req: Request, res: Response) => {
+  try {
+    res.clearCookie('access_token');
+
+    res.status(200).json({ message: 'User logged out successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Error logging out user' });
+  }
+};
+
 //PUT api/users/:id
 //Description: Update user properties
 export const updateUser = async (req: Request, res: Response) => {

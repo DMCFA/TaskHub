@@ -10,4 +10,10 @@ export const limiter = rateLimit({
 export const corsOptions = {
   origin: ['http://localhost:3000', 'http://localhost:10533'],
   credentials: true,
+  allowedHeaders: [
+    'set-cookie',
+    'Content-Type',
+    'Access-Control-Allow-Origin',
+    'Access-Control-Allow-Credentials',
+  ],
 };
