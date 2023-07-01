@@ -8,5 +8,9 @@
 @import '../styles/core/forms';
 
 //Pages
+@import '../styles/pages/landing';
 @import '../styles/pages/welcome';
 @import '../styles/pages/login';
+
+//Components
+@import '../styles/components/home-loader';
