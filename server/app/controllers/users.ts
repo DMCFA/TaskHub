@@ -2,7 +2,11 @@ import bcrypt from 'bcrypt';
 import { Op } from 'sequelize';
 import { Request, Response } from 'express';
 import User from '../models/User';
-import { generateToken, sessionExpirationDate } from '../../utils/tokenUtils';
+import {
+  generateToken,
+  sessionExpirationDate,
+  verifyToken,
+} from '../../utils/tokenUtils';
 import { UserAttributes, UserInstance } from '../../types/User';
 
 //GET api/users
@@ -208,5 +212,42 @@ export const deleteUser = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error deleting user', error);
     return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+//POST api/users/newuser-auth
+// Description: Check if the user is authenticated
+export const checkAuthStatus = async (req: Request, res: Response) => {
+  try {
+    // Check if the access_token cookie exists
+    const token = req.cookies.access_token;
+
+    if (!token) {
+      return res.status(401).json({ error: 'User not authenticated' });
+    }
+
+    // Verify the token and extract the user information
+    const decodedToken = verifyToken(token);
+
+    if (!decodedToken) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    // User is authenticated, return the user object
+    const userObj = decodedToken as UserInstance;
+    const user = await User.findOne({
+      where: { user_id: userObj.user_id },
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    const { password: excludePassword, ...userRes } = user.toJSON();
+
+    res.status(200).json({ user: userRes });
+  } catch (error) {
+    console.error('Error checking authentication', error);
+    res.status(500).json({ error: 'Error checking authentication' });
   }
 };
