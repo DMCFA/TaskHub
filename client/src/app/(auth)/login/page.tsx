@@ -13,8 +13,12 @@ import {
 import { BiShow, BiHide } from 'react-icons/bi';
 import { GrGoogle, GrFacebook, GrApple } from 'react-icons/gr';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
 import { loginUser } from '../../pages/api/users';
+import { AppDispatch } from '../../store';
+import { loginSuccess } from '../../../services/features/userSlice';
 
 interface userIsValid {
   usernameValid: boolean;
@@ -40,6 +44,8 @@ export default function Login() {
     showPassword: false,
   });
 
+  const dispatch: AppDispatch = useDispatch();
+  const router = useRouter();
   let usernameTimer: ReturnType<typeof setTimeout>;
   let passwordTimer: ReturnType<typeof setTimeout>;
 
@@ -133,6 +139,8 @@ export default function Login() {
 
       //fetch
       const user = await loginUser(data);
+      dispatch(loginSuccess(user));
+      router.push('/dashboard');
 
       // Display login error message
       if (!user) {
