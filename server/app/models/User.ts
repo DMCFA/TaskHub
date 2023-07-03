@@ -16,6 +16,12 @@ const User = sequelize.define<UserInstance>(
       type: DataTypes.STRING(50),
       unique: true,
       allowNull: false,
+      validate: {
+        len: {
+          args: [4, 50],
+          msg: 'Username must have a minimum of 4 characters',
+        },
+      },
     },
     fname: {
       type: DataTypes.STRING(50),
@@ -32,6 +38,16 @@ const User = sequelize.define<UserInstance>(
     password: {
       type: DataTypes.STRING(255),
       allowNull: false,
+      validate: {
+        len: {
+          args: [8, 255],
+          msg: 'Password must have a minimum of 8 characters',
+        },
+        isStrongPsssword: {
+          args: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]+$/,
+          msg: 'Password must have at least 1 uppercase letter, 1 lowercase letter, and 1 number',
+        },
+      },
     },
     created_on: {
       type: DataTypes.DATE,
