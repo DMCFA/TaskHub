@@ -192,6 +192,7 @@ export default function Login() {
                 error={!!userIsValid.usernameError}
                 value={username}
                 onChange={(e) => handleUsernameChange(e)}
+                sx={{ marginBlockStart: 0 }}
               />
             </FormControl>
             <FormControl className='login__password' fullWidth error>
