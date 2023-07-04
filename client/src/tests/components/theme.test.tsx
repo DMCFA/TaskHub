@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CustomThemeProvider, ThemeContext } from '../../utils/ThemeContext';
+import { CustomThemeProvider, ThemeContext } from '../../lib/ThemeContext';
 import Navbar from '../../app/components/Nav/Navbar';
 import { useContext } from 'react';
 

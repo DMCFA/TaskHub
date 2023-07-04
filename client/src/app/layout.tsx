@@ -3,7 +3,7 @@
 import './styles.scss';
 import { Roboto } from 'next/font/google';
 import { CssBaseline } from '@mui/material';
-import { CustomThemeProvider } from '../utils/ThemeContext';
+import { CustomThemeProvider } from '../lib/ThemeContext';
 import { Provider } from 'react-redux';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import { store } from './store';

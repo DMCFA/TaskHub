@@ -6,8 +6,44 @@ interface ThemeContextProps {
   toggleTheme: () => void;
 }
 
-const lightTheme = createTheme();
-const darkTheme = createTheme({
+const overrideProperties = createTheme({
+  components: {
+    MuiFormHelperText: {
+      styleOverrides: {
+        root: {
+          fontSize: '1rem',
+        },
+      },
+    },
+
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.4rem',
+        },
+      },
+    },
+
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.4rem',
+        },
+      },
+    },
+
+    MuiFormControl: {
+      styleOverrides: {
+        root: {
+          marginBlockStart: '1.5rem',
+        },
+      },
+    },
+  },
+});
+
+const lightTheme = createTheme(overrideProperties);
+const darkTheme = createTheme(overrideProperties, {
   palette: {
     mode: 'dark',
   },
