@@ -1,0 +1,24 @@
+.error {
+  @include container;
+  @include flex;
+  min-height: 100dvh;
+
+  &__heading {
+    text-align: center;
+  }
+
+  &__btn-container {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  &__reset-btn {
+    @include main-button($color--btn-yellow);
+    font-size: 1.4rem;
+  }
+
+  &__home-link {
+    @include main-button($color--primary);
+  }
+}
