@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function HomeLoader() {
+export default function Loading() {
   return (
     <div className='home-loader'>
       <figure className='home-loader__logo'>

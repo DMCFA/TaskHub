@@ -1,16 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Welcome from './components/Welcome';
-import HomeLoader from './components/HomeLoader';
 import { loginSuccess } from '../services/features/userSlice';
 
 export default function Home() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function autoLogin() {
@@ -32,8 +30,6 @@ export default function Home() {
         }
       } catch (error) {
         console.error('Error trying to authenticate', error);
-      } finally {
-        setIsLoading(false);
       }
     }
     autoLogin();
@@ -41,6 +37,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className='landing'>{isLoading ? <HomeLoader /> : <Welcome />}</div>
+    <div className='landing'>
+      <Welcome />
+    </div>
   );
 }
