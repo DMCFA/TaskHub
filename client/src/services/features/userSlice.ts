@@ -31,10 +31,13 @@ export const userSlice = createSlice({
     logout: (state, action: PayloadAction<User>) => {
       (state.isActive = false), (state.user = null);
     },
+    signupSuccess: (state, action: PayloadAction<User>) => {
+      (state.isActive = true), (state.user = action.payload);
+    },
   },
 });
 
-export const { loginSuccess, logout } = userSlice.actions;
+export const { loginSuccess, logout, signupSuccess } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user;
 
