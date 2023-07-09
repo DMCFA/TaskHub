@@ -43,7 +43,7 @@ const User = sequelize.define<UserInstance>(
           args: [8, 255],
           msg: 'Password must have a minimum of 8 characters',
         },
-        isStrongPsssword: {
+        isStrongPassword: {
           args: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]+$/,
           msg: 'Password must have at least 1 uppercase letter, 1 lowercase letter, and 1 number',
         },
