@@ -6,16 +6,15 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/',
-        has: [
+        source: '/dashboard',
+        missing: [
           {
             type: 'cookie',
             key: 'access_token',
-            value: 'true',
           },
         ],
         permanent: false,
-        destination: '/dashboard',
+        destination: '/',
       },
     ];
   },
