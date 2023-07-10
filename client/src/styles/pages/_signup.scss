@@ -1,0 +1,109 @@
+.signup {
+  &__web-image-container {
+    display: none;
+  }
+
+  &__container {
+    @include container;
+    @include flex;
+    max-width: 50rem;
+    margin-block-start: 5rem;
+    flex-shrink: 0;
+  }
+
+  &__form-container {
+    margin-bottom: 2rem;
+  }
+
+  &__btn-container {
+    margin-block: 2.5rem;
+  }
+
+  &__btn {
+    @include main-button($color--btn-yellow);
+    min-height: 3rem;
+    padding-inline: 0;
+  }
+
+  &__link {
+    font-size: 1.6rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__alt-options {
+    width: 100%;
+    margin-top: 2rem;
+
+    button {
+      @include main-button($color--white);
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+      padding-inline: 0;
+      margin-block-end: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > svg {
+        margin-inline-end: 1rem;
+        height: auto;
+      }
+    }
+  }
+
+  &__loading {
+    @include loader;
+    height: 2.25rem;
+    width: 2.25rem;
+  }
+}
+
+@include media('>=screen-sm') {
+  .signup {
+    display: flex;
+    flex-direction: row-reverse;
+
+    &__web-image-container {
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
+      place-items: center;
+      margin-block-start: 5rem;
+      margin-block-end: 2rem;
+    }
+
+    &__web-image {
+      grid-column: 1;
+      grid-row: 1;
+      height: 100%;
+      max-width: 100%;
+    }
+  }
+}
+
+@include media('>=screen-md') {
+  .signup {
+    &__logo {
+      max-width: 40rem;
+      width: 100%;
+    }
+
+    &__pattern {
+      max-width: 45rem;
+      width: 100%;
+    }
+  }
+}
+
+@include media('>=screen-lg') {
+  .signup {
+    > div {
+      margin-block: 0;
+      padding-block: 3rem;
+    }
+  }
+}
