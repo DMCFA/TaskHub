@@ -1,5 +1,4 @@
 import { Model } from 'sequelize';
-import { UserAttributes } from './User';
 
 interface Comment {
   comment: string;
@@ -29,5 +28,4 @@ export interface TaskAttributes extends Model {
   project_id: number;
   created_on: Date;
   updated_on: Date;
-  user?: UserAttributes;
 }

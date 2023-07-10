@@ -1,5 +1,6 @@
 import User from '../app/models/User';
 import Task from '../app/models/Task';
+import Comment from '../app/models/Comment';
 
 User.hasMany(Task, {
   foreignKey: 'assigned_user_id',
@@ -11,4 +12,14 @@ Task.belongsTo(User, {
   as: 'user',
 });
 
-export { User, Task };
+Task.hasMany(Comment, {
+  foreignKey: 'task_id',
+  as: 'comments',
+});
+
+Comment.belongsTo(Task, {
+  foreignKey: 'task_id',
+  as: 'tasks',
+});
+
+export { User, Task, Comment };

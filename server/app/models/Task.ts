@@ -1,8 +1,9 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/database';
 import { TaskAttributes } from '../../types/Task';
+import User from './User';
 
-const Tasks = sequelize.define<TaskAttributes>(
+const Task = sequelize.define<TaskAttributes>(
   'tasks',
   {
     task_id: {
@@ -47,10 +48,6 @@ const Tasks = sequelize.define<TaskAttributes>(
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: true,
     },
-    comments: {
-      type: DataTypes.JSONB,
-      allowNull: true,
-    },
     subtasks: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
       allowNull: true,
@@ -75,19 +72,13 @@ const Tasks = sequelize.define<TaskAttributes>(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'users',
+        model: User,
         key: 'user_id',
       },
     },
     project_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      /*
-        references: {
-            model: 'projects',
-            key: 'project__id',
-          },
-          */
     },
     created_on: {
       type: DataTypes.DATE,
@@ -96,9 +87,10 @@ const Tasks = sequelize.define<TaskAttributes>(
     updated_on: {
       type: DataTypes.DATE,
       allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
   },
   { timestamps: false }
 );
 
-export default Tasks;
+export default Task;
