@@ -139,11 +139,14 @@ export default function Login() {
 
       //fetch
       const user = await loginUser(data);
-      dispatch(loginSuccess(user));
-      router.push('/dashboard');
+      console.log(user);
+      if (user) {
+        dispatch(loginSuccess(user));
+        router.push('/dashboard');
+      }
 
       // Display login error message
-      if (!user) {
+      else {
         setUserIsValid((prevState) => ({
           ...prevState,
           usernameError: 'Invalid username or password',
