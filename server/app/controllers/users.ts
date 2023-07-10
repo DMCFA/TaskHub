@@ -8,6 +8,7 @@ import {
   verifyToken,
 } from '../../utils/tokenUtils';
 import { UserAttributes, UserInstance } from '../../types/User';
+import { Task } from '../../config/associations';
 
 //GET api/users
 //Description: Get all users
@@ -28,6 +29,7 @@ export const getUserById = async (req: Request, res: Response) => {
     const { id } = req.params;
     const user = await User.findByPk(id, {
       attributes: { exclude: ['password'] },
+      include: [{ model: Task, as: 'tasks' }],
     });
 
     if (!user) {
@@ -104,6 +106,7 @@ export const loginUser = async (req: Request, res: Response) => {
     // Find the user by username or email
     const user = await User.findOne({
       where: { [Op.or]: [{ username }, { email: username }] },
+      include: [{ model: Task, as: 'tasks' }],
     });
 
     // User not found/password mismatch
@@ -183,9 +186,6 @@ export const deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     const loggedInUser = req.user;
 
-    console.log(req.params);
-    console.log(loggedInUser);
-
     if (!loggedInUser) {
       return res.status(401).json({ error: 'Unauthorized access' });
     }
@@ -237,6 +237,7 @@ export const checkAuthStatus = async (req: Request, res: Response) => {
     const userObj = decodedToken as UserInstance;
     const user = await User.findOne({
       where: { user_id: userObj.user_id },
+      include: [{ model: Task, as: 'tasks' }],
     });
 
     if (!user) {

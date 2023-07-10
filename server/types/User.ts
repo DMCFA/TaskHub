@@ -12,6 +12,6 @@ export interface UserAttributes {
 }
 
 export interface UserInstance extends Model<UserAttributes>, UserAttributes {
-  isValidPassword: (password: string) => boolean;
+  isValidPassword: (password: string) => Promise<boolean>;
   token: string;
 }
