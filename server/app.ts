@@ -7,6 +7,7 @@ import cookieParser from 'cookie-parser';
 import { limiter, corsOptions } from './config/express';
 import userRouter from './app/routes/users';
 import { globalErrorHandler } from './app/middleware/middleware';
+import taskRouter from './app/routes/tasks';
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -23,6 +24,7 @@ app.use(helmet());
 
 //routes
 app.use('/api/users', userRouter);
+app.use('/api/tasks', taskRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

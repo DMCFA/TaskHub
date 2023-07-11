@@ -1,24 +1,26 @@
 import { Model } from 'sequelize';
 
-interface Comment {
-  comment: string;
-  user_id: number;
-  posted_date: Date;
-  likes: number;
-}
+type taskPriority = 'Urgent' | 'High' | 'Standard' | 'Low';
+
+type taskStatus =
+  | 'Pending'
+  | 'In Progress'
+  | 'Completed'
+  | 'On Hold'
+  | 'Verification'
+  | 'Cancelled';
 
 export interface TaskAttributes extends Model {
   task_id: number;
   title: string;
   description: string | null;
-  status: string;
-  priority: string;
+  status: taskStatus;
+  priority: taskPriority;
   due_date: Date;
   start_date: Date | null;
   completion_date: Date | null;
   tags: string[] | null;
   attachments: string[] | null;
-  comments: Comment[] | null;
   subtasks: number[] | null;
   followers: number[] | null;
   estimated_time: number | null;
