@@ -13,7 +13,7 @@ $font-weight-heading: 600;
 @mixin body-text-style {
   font-size: $body-font-size-sm;
   font-weight: 400;
-  color: $color--black-body;
+  color: inherit;
   line-height: $line-height;
   letter-spacing: normal;
   margin-bottom: 1rem;
@@ -25,7 +25,7 @@ $font-weight-heading: 600;
 
 @mixin h1-style {
   font-size: $h1-font-size-sm;
-  color: $color--black-body;
+  color: inherit;
   font-weight: 700;
 
   @include media('>=screen-md') {
@@ -35,7 +35,7 @@ $font-weight-heading: 600;
 
 @mixin h2-style {
   font-size: $h2-font-size-sm;
-  color: $color--black-body;
+  color: inherit;
   font-weight: 700;
   text-transform: capitalize;
 
@@ -46,7 +46,7 @@ $font-weight-heading: 600;
 
 @mixin h3-style {
   font-size: $h3-font-size-sm;
-  color: $color--black-body;
+  color: inherit;
   font-weight: 700;
 
   @include media('>=screen-md') {

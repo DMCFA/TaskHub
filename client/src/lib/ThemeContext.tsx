@@ -59,10 +59,24 @@ export const CustomThemeProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const getInitialTheme = () => {
+    if (typeof localStorage !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme');
+      return storedTheme === 'dark' ? 'dark' : 'light';
+    }
+    return 'light';
+  };
+
+  const [theme, setTheme] = useState<'light' | 'dark'>(getInitialTheme);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light';
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('theme', newTheme);
+      }
+      return newTheme;
+    });
   };
 
   const activeTheme = theme === 'light' ? lightTheme : darkTheme;
