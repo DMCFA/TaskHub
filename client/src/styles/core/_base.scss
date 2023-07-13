@@ -22,6 +22,13 @@ a {
 .dark {
   background-color: $color--black-body;
   color: $color--white;
+
+  h1,
+  h2,
+  h3,
+  p {
+    color: $color--white;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
