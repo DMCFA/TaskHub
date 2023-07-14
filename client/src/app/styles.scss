@@ -7,6 +7,9 @@
 @import '../styles/core/mixin';
 @import '../styles/core/forms';
 
+//Theme
+@import '../styles/theme/theme';
+
 //Pages
 @import '../styles/pages/landing';
 @import '../styles/pages/welcome';
@@ -17,4 +20,8 @@
 
 //Components
 @import '../styles/components/home-loader';
-@import '../styles/components/nav';
+
+//Navigation
+@import '../styles/navigation/nav';
+@import '../styles/navigation/side-nav';
+@import '../styles/navigation/footer';
