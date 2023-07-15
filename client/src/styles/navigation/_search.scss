@@ -1,0 +1,23 @@
+.search-bar {
+  margin: auto;
+  padding: 0.3rem 0 0;
+  text-align: center;
+
+  &__container {
+    display: flex;
+    align-items: center;
+    border-radius: 0.8em;
+    border: 1px solid transparent;
+    box-shadow: 0 0 0.3rem transparent;
+
+    &--opened {
+      border-color: rgba(218, 208, 190, 1);
+      box-shadow: 0 0 0.3rem rgba(60, 60, 60, 0.4);
+
+      .MuiInputBase-input {
+        width: 7rem;
+        opacity: 1;
+      }
+    }
+  }
+}
