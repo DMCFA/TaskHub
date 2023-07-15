@@ -1,0 +1,36 @@
+.dark {
+  background-color: $color--black-body;
+  color: $color--white;
+
+  h1,
+  h2,
+  h3,
+  p {
+    color: $color--white;
+  }
+
+  .nav__logo {
+    &::before {
+      display: none;
+    }
+  }
+
+  .footer__links {
+    > a {
+      background-image: linear-gradient(
+        to right,
+        #3fa7d6,
+        #3fa7d6 50%,
+        #fff 50%
+      );
+    }
+  }
+
+  .hamburger__line {
+    stroke: $color--white;
+  }
+
+  .dashboard {
+    background-color: $color--dark-body;
+  }
+}
