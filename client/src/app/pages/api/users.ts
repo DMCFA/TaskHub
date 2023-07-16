@@ -1,3 +1,7 @@
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
+import { Dispatch } from '@reduxjs/toolkit';
+import { loginSuccess } from '../../../services/features/userSlice';
+
 const baseUrl = 'http://localhost:3001/api/users';
 const headers = { 'Content-Type': 'application/json' };
 
@@ -49,3 +53,25 @@ export const registerUser = async (data: {
     console.error('Error', error);
   }
 };
+
+export async function autoLogin(dispatch: Dispatch, router: AppRouterInstance) {
+  try {
+    const response = await fetch(
+      'http://localhost:3001/api/users/newuser-auth',
+      {
+        method: 'POST',
+        credentials: 'include',
+      }
+    );
+    if (response.status === 200) {
+      const userResponse = await response.json();
+      const user = userResponse.user;
+      dispatch(loginSuccess(user));
+      router.push('/dashboard');
+    } else {
+      console.error('Auto-login failed:', response.status);
+    }
+  } catch (error) {
+    console.error('Error trying to authenticate', error);
+  }
+}
