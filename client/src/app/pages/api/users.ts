@@ -75,3 +75,18 @@ export async function autoLogin(dispatch: Dispatch, router: AppRouterInstance) {
     console.error('Error trying to authenticate', error);
   }
 }
+
+export async function logout(router: AppRouterInstance) {
+  try {
+    const response = await fetch(`${baseUrl}/logout`, {
+      method: 'POST',
+    });
+    if (response.status === 200) {
+      router.push('/');
+    } else {
+      console.error('Logout failed:', response.status);
+    }
+  } catch (error) {
+    console.error('Error trying to logout', error);
+  }
+}
