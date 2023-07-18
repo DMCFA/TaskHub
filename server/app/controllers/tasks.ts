@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import Task from '../models/Task';
 import User from '../models/User';
+import Notification from '../models/Notifications';
 
 //GET api/tasks
 //Description: Get all tasks
@@ -130,9 +131,6 @@ export const editTask = async (req: Request, res: Response) => {
       return res.status(404).json({ error: 'Task not found' });
     }
 
-    console.log(task.assigned_user_id);
-    console.log(loggedInUser.user_id);
-
     // Check if the logged-in user is the assigned user of the task or an admin
     if (task.assigned_user_id !== loggedInUser.user_id && !user.is_admin) {
       return res.status(403).json({ error: 'Access denied' });
@@ -141,7 +139,16 @@ export const editTask = async (req: Request, res: Response) => {
     // Update the task
     await task.update(req.body);
 
-    res.status(200).json({ message: 'Task updated successfully', task });
+    //Create a new notification for the task update
+    const notificationMessage = `Task "${task.title}" has been updated.`;
+    const notification = await Notification.create({
+      user_id: task.assigned_user_id,
+      message: notificationMessage,
+    });
+
+    res
+      .status(200)
+      .json({ message: 'Task updated successfully', task, notification });
   } catch (error) {
     console.error('Error editing task:', error);
     res.status(500).json({ error: 'Failed to edit task' });
