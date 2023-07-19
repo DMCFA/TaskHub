@@ -82,3 +82,15 @@
     }
   }
 }
+
+@include media('>=screen-md') {
+  .footer {
+    margin-left: 27rem;
+  }
+}
+
+@include media('>=screen-lg') {
+  .footer {
+    margin-left: 30rem;
+  }
+}

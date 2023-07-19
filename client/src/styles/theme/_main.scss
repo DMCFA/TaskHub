@@ -1,0 +1,21 @@
+.main {
+  &__main {
+    background-color: $color--grey-body;
+  }
+}
+
+@include media('>=screen-md') {
+  .main {
+    &__main {
+      margin-left: 27rem;
+    }
+  }
+}
+
+@include media('>=screen-lg') {
+  .main {
+    &__main {
+      margin-left: 30rem;
+    }
+  }
+}

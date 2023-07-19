@@ -33,4 +33,9 @@
   .dashboard {
     background-color: $color--dark-body;
   }
+
+  &.MuiDrawer-root {
+    background-color: $color--black-body;
+    color: $color--white;
+  }
 }
