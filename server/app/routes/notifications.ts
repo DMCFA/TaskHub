@@ -1,5 +1,6 @@
 import express from 'express';
 import {
+  deleteNotifications,
   getAllNotifications,
   getNotificationsByUserId,
 } from '../controllers/notifications';
@@ -9,5 +10,6 @@ const notificationRouter = express.Router();
 
 notificationRouter.get('/', authenticateUser, checkAdmin, getAllNotifications);
 notificationRouter.get('/:id', getNotificationsByUserId);
+notificationRouter.delete('/:id', authenticateUser, deleteNotifications);
 
 export default notificationRouter;
