@@ -9,6 +9,7 @@
 
 //Theme
 @import '../styles/theme/theme';
+@import '../styles/theme/main';
 
 //Pages
 @import '../styles/pages/landing';
@@ -27,3 +28,4 @@
 @import '../styles/navigation/footer';
 @import '../styles/navigation/hamburger';
 @import '../styles/navigation/search';
+@import '../styles/navigation/drawer';

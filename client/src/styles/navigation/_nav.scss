@@ -1,0 +1,57 @@
+.nav {
+  &__container {
+    @include container;
+    padding-block: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-left,
+    &-right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    &-right {
+      gap: 1rem;
+    }
+  }
+
+  &__heading {
+    display: none;
+    color: $color--secondary;
+  }
+}
+
+@include media('>=screen-xs') {
+  .nav {
+    &__container {
+      justify-content: space-between;
+
+      &-right,
+      &-left {
+        gap: 3rem;
+      }
+    }
+  }
+}
+
+@include media('>=screen-md') {
+  .nav {
+    &__mobile {
+      display: none;
+    }
+
+    &__container {
+      min-height: 7.6rem;
+    }
+  }
+}
+
+@keyframes shine {
+  100% {
+    left: 75%;
+  }
+}

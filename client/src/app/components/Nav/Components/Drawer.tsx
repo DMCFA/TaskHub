@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Collapse,
   Toolbar,
@@ -54,16 +55,45 @@ const favoritesNavList = ['Web Development', 'Microservices', 'Maps'];
 
 export default function CustomDrawer({ handleClick, open }: DrawerProps) {
   return (
-    <div>
-      <Toolbar />
+    <div className='drawer'>
+      <Toolbar>
+        <div className='drawer__logo'>
+          <Link href='/dashboard'>
+            <figure className='drawer__logo'>
+              <Image
+                src='/img/logo-no-background-cropped.svg'
+                className='drawer-image'
+                priority
+                width={60}
+                height={60}
+                alt='company logo'
+              />
+            </figure>
+          </Link>
+        </div>
+      </Toolbar>
       <Divider />
       <List>
         {navItemData.map((item) => (
           <ListItem key={item.text} disablePadding>
-            <IconButton color='inherit'>
+            <IconButton
+              color='inherit'
+              className='drawer__icon-button'
+              sx={{
+                borderRadius: '0.3rem',
+                width: '100%',
+                textAlign: 'initial',
+              }}
+            >
               <Link href={item.href}>
-                <ListItemIcon color='inherit'>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
+                <ListItemIcon sx={{ color: 'rgba(0,0,0,1)' }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText
+                  className='drawer__text'
+                  primary={item.text}
+                  primaryTypographyProps={{ fontSize: '1.1rem' }}
+                />
               </Link>
             </IconButton>
           </ListItem>
@@ -72,21 +102,34 @@ export default function CustomDrawer({ handleClick, open }: DrawerProps) {
       <Divider />
       <List>
         <ListItemButton onClick={handleClick}>
-          <ListItemText primary='Projects' />
+          <ListItemText
+            primary='Projects'
+            primaryTypographyProps={{ fontWeight: '600', fontSize: '1.2rem' }}
+          />
           {open ? <MdExpandLess /> : <MdExpandMore />}
         </ListItemButton>
         <Collapse in={open} timeout='auto' unmountOnExit>
           <List component='div' disablePadding>
             {favoritesNavList.map((item, index) => (
               <ListItem key={item} disablePadding>
-                <IconButton color='inherit'>
+                <IconButton
+                  color='inherit'
+                  sx={{
+                    borderRadius: '0.3rem',
+                    width: '100%',
+                    textAlign: 'initial',
+                  }}
+                >
                   <Link href='/dashboard'>
                     <ListItemIcon
                       color={index % 2 === 0 ? 'primary' : 'secondary'}
                     >
                       {index % 2 === 0 ? <MdOutlineWork /> : <GrProjects />}
                     </ListItemIcon>
-                    <ListItemText primary={item} />
+                    <ListItemText
+                      primary={item}
+                      primaryTypographyProps={{ fontSize: '1.1rem' }}
+                    />
                   </Link>
                 </IconButton>
               </ListItem>
