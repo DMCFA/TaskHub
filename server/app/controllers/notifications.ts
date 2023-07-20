@@ -38,6 +38,36 @@ export const getNotificationsByUserId = async (req: Request, res: Response) => {
   }
 };
 
+// PUT /api/notifications/read/:notificationId
+// Description: Edit a notification
+export const updateNotificationReadStatus = async (
+  req: Request,
+  res: Response
+) => {
+  const { id: notificationId } = req.params;
+
+  try {
+    const notification = await Notification.findByPk(notificationId);
+
+    if (!notification) {
+      return res.status(404).json({ error: 'Notification not found' });
+    }
+
+    // Update the read_status to "read"
+    notification.read_status = 'read';
+
+    // Save the updated notification
+    await notification.save();
+
+    res
+      .status(200)
+      .json({ message: 'Notification updated successfully', notification });
+  } catch (error) {
+    console.error('Error editing notification:', error);
+    res.status(500).json({ error: 'Failed to edit notification' });
+  }
+};
+
 //DELETE api/notifications/:id
 //Description: Delete notifications
 export const deleteNotifications = async (req: Request, res: Response) => {
