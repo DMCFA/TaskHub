@@ -23,6 +23,23 @@
     display: none;
     color: $color--secondary;
   }
+
+  &__notification-container {
+    opacity: 0.7;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+    &:has(.nav__notification--unread) {
+      opacity: 1;
+    }
+  }
+
+  &__notification {
+    &--unread {
+      font-weight: 700;
+    }
+  }
 }
 
 @include media('>=screen-xs') {

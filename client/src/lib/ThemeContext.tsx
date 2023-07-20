@@ -1,6 +1,17 @@
 import { createContext, useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material';
 
+declare module '@mui/material/styles' {
+  interface BreakpointOverrides {
+    xs: true;
+    sm: true;
+    md: true;
+    lg: true;
+    xl: true;
+    lp: true;
+  }
+}
+
 interface ThemeContextProps {
   theme: 'light' | 'dark';
   toggleTheme: () => void;
@@ -38,6 +49,16 @@ const overrideProperties = createTheme({
           marginBlockStart: '1.5rem',
         },
       },
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 480,
+      sm: 768,
+      md: 991,
+      lp: 1200,
+      lg: 1366,
+      xl: 1600,
     },
   },
 });
