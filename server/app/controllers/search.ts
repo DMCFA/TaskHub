@@ -13,7 +13,6 @@ export const searchAll = async (req: Request, res: Response) => {
     // Search in Users
     const users = (
       await User.findAll({
-        attributes: { exclude: ['password'] },
         where: {
           [Op.or]: [
             { username: { [Op.iLike]: `%${query}%` } },
@@ -22,7 +21,7 @@ export const searchAll = async (req: Request, res: Response) => {
         },
       })
     ).map((user) => ({
-      ...user.get(),
+      username: user.get().username,
       tableName: 'User',
       id: user.get().user_id,
     }));
@@ -33,7 +32,7 @@ export const searchAll = async (req: Request, res: Response) => {
         where: { name: { [Op.iLike]: `%${query}%` } },
       })
     ).map((team) => ({
-      ...team.get(),
+      name: team.get().name,
       tableName: 'Team',
       id: team.get().team_id,
     }));
@@ -44,7 +43,7 @@ export const searchAll = async (req: Request, res: Response) => {
         where: { title: { [Op.iLike]: `%${query}%` } },
       })
     ).map((task) => ({
-      ...task.get(),
+      title: task.get().title,
       tableName: 'Task',
       id: task.get().task_id,
     }));
@@ -55,7 +54,7 @@ export const searchAll = async (req: Request, res: Response) => {
         where: { name: { [Op.iLike]: `%${query}%` } },
       })
     ).map((project) => ({
-      ...project.get(),
+      name: project.get().name,
       tableName: 'Project',
       id: project.get().project_id,
     }));

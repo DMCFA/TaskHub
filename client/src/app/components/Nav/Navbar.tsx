@@ -100,7 +100,11 @@ const Navbar = () => {
           />
         </div>
         <div className='nav__container-right'>
-          <SearchBar isOpened={searchOpen} handleClick={handleSearchClick} />
+          <SearchBar
+            isOpened={searchOpen}
+            setIsOpened={setSearchOpen}
+            handleClick={handleSearchClick}
+          />
           <Link href='/dashboard/add-task'>
             <IconButton
               color='inherit'
