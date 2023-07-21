@@ -22,7 +22,7 @@ interface DrawerProps {
   open: boolean;
 }
 
-const navItemData = [
+export const navItemData = [
   { text: 'Home', href: '/dashboard', icon: <GrHome /> },
   {
     text: 'My Tasks',

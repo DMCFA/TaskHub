@@ -1,0 +1,30 @@
+.side-nav-skeleton {
+  display: none;
+  box-sizing: border-box;
+
+  &__logo {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@include media('>=screen-md') {
+  .side-nav-skeleton {
+    display: block;
+    max-width: 27rem;
+    height: 100%;
+    position: absolute;
+    top: 0;
+  }
+}
+
+@include media('>=screen-lg') {
+  .side-nav-skeleton {
+    width: 30rem;
+    max-width: 30rem;
+
+    &__second-heading {
+      width: 30rem;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 .nav {
   &__container {
     @include container;
+    max-width: unset;
     padding-block: 1rem;
     display: flex;
     justify-content: space-between;
