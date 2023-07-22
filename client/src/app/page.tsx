@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import Welcome from './components/Welcome';
+import Welcome from './components/Misc/Welcome';
 import { autoLogin } from './pages/api/users';
 
 export default function Home() {

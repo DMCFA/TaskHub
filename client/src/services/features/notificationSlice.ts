@@ -24,12 +24,21 @@ export const notificationSlice = createSlice({
   initialState,
   reducers: {
     getNotifications: (state, action: PayloadAction<Notification[]>) => {
-      (state.hasNotifications = true), (state.notifications = action.payload);
+      state.hasNotifications = true;
+      state.notifications = action.payload;
+    },
+    addNotification: (state, action: PayloadAction<Notification>) => {
+      state.hasNotifications = true;
+      if (state.notifications) {
+        state.notifications.push(action.payload);
+      } else {
+        state.notifications = [action.payload];
+      }
     },
   },
 });
 
-export const { getNotifications } = notificationSlice.actions;
+export const { getNotifications, addNotification } = notificationSlice.actions;
 
 export const selectNotifications = (state: RootState) => state.notifications;
 
