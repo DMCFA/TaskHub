@@ -9,6 +9,8 @@ import {
 } from '../../utils/tokenUtils';
 import { UserAttributes, UserInstance } from '../../types/User';
 import { Task } from '../../config/associations';
+import Team from '../models/Team';
+import UserTeam from '../models/UserTeam';
 
 //GET api/users
 //Description: Get all users
@@ -250,5 +252,24 @@ export const checkAuthStatus = async (req: Request, res: Response) => {
   } catch (error) {
     console.error('Error checking authentication', error);
     res.status(500).json({ error: 'Error checking authentication' });
+  }
+};
+
+//GET api/users/teams/:id
+//Description: Get all teams from an user
+export const getUserTeams = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const userTeams = await UserTeam.findAll({ where: { user_id: id } });
+    const teams = [];
+
+    for (let userTeam of userTeams) {
+      const team = await Team.findOne({ where: { team_id: userTeam.team_id } });
+      teams.push(team);
+    }
+
+    res.status(200).json({ teams });
+  } catch (error) {
+    res.status(500).json({ error: 'Error getting teams for user' });
   }
 };
