@@ -218,7 +218,9 @@ const Navbar = () => {
             <MenuItem onClick={handleUserClose}>
               <Link href='/my-account'>My account</Link>
             </MenuItem>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={handleLogout} className='nav__logout'>
+              Logout
+            </MenuItem>
           </Menu>
         </div>
       </div>

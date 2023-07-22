@@ -41,6 +41,13 @@
       font-weight: 700;
     }
   }
+
+  &__logout {
+    @include flex;
+    flex-grow: 1;
+    font-size: 1.4rem;
+    color: inherit;
+  }
 }
 
 @include media('>=screen-xs') {

@@ -20,6 +20,11 @@
         opacity: 1;
       }
     }
+
+    &--has-results {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
   }
 
   &__results {
@@ -30,6 +35,8 @@
     background-color: $color--white;
     border-color: rgba(218, 208, 190, 1);
     box-shadow: 0 0 0.3rem rgba(60, 60, 60, 0.4);
+    border-bottom-left-radius: 0.8rem;
+    border-bottom-right-radius: 0.8rem;
   }
 }
 

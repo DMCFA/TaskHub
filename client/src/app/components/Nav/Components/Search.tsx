@@ -128,7 +128,7 @@ export default function SearchBar({
       <div
         className={`search-bar__container ${
           isOpened ? 'search-bar__container--opened' : ''
-        }`}
+        } ${results ? 'search-bar__container--has-results' : ''}`}
       >
         <IconButton
           className='search-bar__btn'
@@ -147,7 +147,7 @@ export default function SearchBar({
         />
       </div>
       {isOpened && isLoading && searchQuery.length > 3 && (
-        <div className='search-bar__results--loading'>
+        <div className='search-bar__results search-bar__results--loading'>
           <List>
             <ListItem>
               <ListItemText primary='Results loading...' />
@@ -156,7 +156,7 @@ export default function SearchBar({
         </div>
       )}
       {isOpened && isError && (
-        <div className='search-bar__results--error'>
+        <div className='search-bar__results search-bar__results--error'>
           <List>
             <ListItem>
               <ListItemText primary='Error occurred while fetching data' />
@@ -165,7 +165,7 @@ export default function SearchBar({
         </div>
       )}
       {isOpened && !isLoading && !isError && results.length === 0 && (
-        <div className='search-bar__results--no-results'>
+        <div className='search-bar__results search-bar__results--no-results'>
           <List>
             <ListItem>
               <ListItemText primary='No results found' />
