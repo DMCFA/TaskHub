@@ -10,6 +10,7 @@ import { globalErrorHandler } from './app/middleware/middleware';
 import taskRouter from './app/routes/tasks';
 import notificationRouter from './app/routes/notifications';
 import searchRouter from './app/routes/search';
+import teamsRouter from './app/routes/teams';
 
 const app = express();
 const port = process.env.PORT || 3003;
@@ -29,6 +30,7 @@ app.use('/api/users', userRouter);
 app.use('/api/tasks', taskRouter);
 app.use('/api/notifications', notificationRouter);
 app.use('/api/search', searchRouter);
+app.use('/api/teams', teamsRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
