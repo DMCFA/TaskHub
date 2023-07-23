@@ -1,5 +1,6 @@
 .home-loader {
   @include flex;
+  min-height: 100dvh;
 
   &__loading {
     display: inline-block;

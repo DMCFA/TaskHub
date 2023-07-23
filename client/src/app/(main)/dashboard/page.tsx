@@ -2,14 +2,19 @@
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../../lib/ThemeContext';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { autoLogin } from '../../pages/api/users';
 import { getNotificationsForUser } from '../../pages/api/notifications';
+import DashboardNav from '../../components/Nav/DashboardNav';
+
+//types
+type activeTab = 'projects' | 'favorites' | 'worked-on';
 
 export default function Dashboard() {
+  const [active, setActive] = useState<activeTab>('projects');
   const user = useSelector((state: RootState) => state.user);
   const { theme } = useContext(ThemeContext);
   const router = useRouter();
@@ -34,8 +39,7 @@ export default function Dashboard() {
   if (user.user) {
     return (
       <section className='dashboard'>
-        <h1>{user.user.fname}</h1>
-        <Link href='/dashboard/add-task'>Add task</Link>
+        <DashboardNav active={active} setActive={setActive} />
       </section>
     );
   } else {
