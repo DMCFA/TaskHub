@@ -1,4 +1,5 @@
 import { Model } from 'sequelize';
+import { UserAttributes } from './User';
 
 export interface ProjectAttributes extends Model {
   project_id: number;
@@ -10,4 +11,5 @@ export interface ProjectAttributes extends Model {
   team_id: number;
   created_on: Date;
   updated_on: Date;
+  users?: UserAttributes[];
 }

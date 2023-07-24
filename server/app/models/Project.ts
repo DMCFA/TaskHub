@@ -29,7 +29,7 @@ const Project = sequelize.define<ProjectAttributes>(
       type: DataTypes.DATE,
       allowNull: true,
     },
-    project_manager_id: {
+    project_manager: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
