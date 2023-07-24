@@ -11,6 +11,7 @@ import { UserAttributes, UserInstance } from '../../types/User';
 import { Task } from '../../config/associations';
 import Team from '../models/Team';
 import UserTeam from '../models/UserTeam';
+import UserProject from '../models/UserProject';
 
 //GET api/users
 //Description: Get all users
@@ -271,5 +272,28 @@ export const getUserTeams = async (req: Request, res: Response) => {
     res.status(200).json({ teams });
   } catch (error) {
     res.status(500).json({ error: 'Error getting teams for user' });
+  }
+};
+
+// GET /api/users/projects/:id
+// Description: Get all projects of a specific user
+export const getUserProjects = async (req: Request, res: Response) => {
+  const { id: stringId } = req.params;
+  const userId = parseInt(stringId);
+
+  try {
+    // Find the user
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Get all projects associated with the user
+    const projects = await user.getProjects();
+
+    res.status(200).json({ projects });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error retrieving user projects' });
   }
 };
