@@ -1,6 +1,7 @@
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
 import { Dispatch } from '@reduxjs/toolkit';
 import { loginSuccess } from '../../../services/features/userSlice';
+import { setProjects } from '../../../services/features/projectSlice';
 
 const baseUrl = 'http://localhost:3001/api/users';
 const headers = { 'Content-Type': 'application/json' };
@@ -56,13 +57,10 @@ export const registerUser = async (data: {
 
 export async function autoLogin(dispatch: Dispatch, router: AppRouterInstance) {
   try {
-    const response = await fetch(
-      'http://localhost:3001/api/users/newuser-auth',
-      {
-        method: 'POST',
-        credentials: 'include',
-      }
-    );
+    const response = await fetch(`${baseUrl}/newuser-auth`, {
+      method: 'POST',
+      credentials: 'include',
+    });
     if (response.status === 200) {
       const userResponse = await response.json();
       const user = userResponse.user;
@@ -72,7 +70,7 @@ export async function autoLogin(dispatch: Dispatch, router: AppRouterInstance) {
       console.error('Auto-login failed:', response.status);
     }
   } catch (error) {
-    console.error('Error trying to authenticate', error);
+    console.error('Auto-login failed:', error);
   }
 }
 
@@ -89,4 +87,29 @@ export async function logout(router: AppRouterInstance) {
   } catch (error) {
     console.error('Error trying to logout', error);
   }
+}
+
+export async function getUserProjects(userId: number) {
+  try {
+    const res = await fetch(`${baseUrl}/projects/${userId}`);
+    if (res.status === 200) {
+      const projects = await res.json();
+      return projects;
+    } else {
+      console.error('Failed to get user projects:', res.status);
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+export function getProjectsForUser(userId: number) {
+  return async (dispatch: Dispatch) => {
+    try {
+      const projects = await getUserProjects(userId);
+      dispatch(setProjects(projects));
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+    }
+  };
 }
