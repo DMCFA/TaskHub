@@ -55,8 +55,6 @@ export const updateNotificationReadStatus = async (
 
     // Update the read_status to "read"
     notification.read_status = 'read';
-
-    // Save the updated notification
     await notification.save();
 
     res

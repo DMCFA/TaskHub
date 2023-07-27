@@ -36,7 +36,6 @@ Team.belongsToMany(User, {
   foreignKey: 'team_id',
 });
 
-// Add these lines
 User.belongsToMany(Project, {
   through: { model: UserProject, unique: false },
   foreignKey: 'user_id',

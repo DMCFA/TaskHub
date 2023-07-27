@@ -1,4 +1,3 @@
-// Comment.ts
 import { DataTypes } from 'sequelize';
 import sequelize from '../../config/database';
 import { CommentAttributes } from '../../types/Comment';
