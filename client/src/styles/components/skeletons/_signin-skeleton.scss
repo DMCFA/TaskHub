@@ -1,0 +1,23 @@
+.login-skeleton {
+  &__form-container {
+    .MuiSkeleton-root {
+      width: 30rem;
+    }
+  }
+
+  &__options,
+  &__form {
+    @include flex;
+    gap: 2rem;
+  }
+}
+
+@include media('>=screen-md') {
+  .login-skeleton {
+    &__form-container {
+      .MuiSkeleton-root {
+        width: 35rem;
+      }
+    }
+  }
+}

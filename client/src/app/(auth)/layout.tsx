@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
 import Loading from './loading';
-import Login from './page';
 
-export default function LoginLayout({
+export default function AuthLayout({
   children,
 }: {
   children: React.ReactNode;
