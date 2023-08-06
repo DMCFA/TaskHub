@@ -1,7 +1,7 @@
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
 import { Dispatch } from '@reduxjs/toolkit';
 import { loginSuccess } from '../../../services/features/userSlice';
-import { setProjects } from '../../../services/features/projectSlice';
+import { Project, setProjects } from '../../../services/features/projectSlice';
 
 const baseUrl = 'http://localhost:3001/api/users';
 const headers = { 'Content-Type': 'application/json' };
@@ -89,7 +89,7 @@ export async function logout(router: AppRouterInstance) {
   }
 }
 
-export async function getUserProjects(userId: number) {
+export async function getUserProjects(userId: number): Promise<Project[]> {
   try {
     const res = await fetch(`${baseUrl}/projects/${userId}`);
     if (res.status === 200) {
@@ -97,9 +97,11 @@ export async function getUserProjects(userId: number) {
       return projects;
     } else {
       console.error('Failed to get user projects:', res.status);
+      return [];
     }
   } catch (error) {
     console.error('Error:', error);
+    return [];
   }
 }
 

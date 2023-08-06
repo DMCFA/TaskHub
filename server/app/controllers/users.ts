@@ -291,7 +291,7 @@ export const getUserProjects = async (req: Request, res: Response) => {
     // Get all projects associated with the user
     const projects = await user.getProjects();
 
-    res.status(200).json({ projects });
+    res.status(200).json(projects);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error retrieving user projects' });

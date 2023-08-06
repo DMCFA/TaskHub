@@ -14,11 +14,11 @@ export interface Project {
 }
 
 export interface ProjectState {
-  projects: Project[] | null;
+  projects: Project[];
 }
 
 const initialState: ProjectState = {
-  projects: null,
+  projects: [],
 };
 
 export const projectSlice = createSlice({
@@ -29,26 +29,23 @@ export const projectSlice = createSlice({
       state.projects = action.payload;
     },
     addProject: (state, action: PayloadAction<Project>) => {
-      if (state.projects) state.projects.push(action.payload);
+      state.projects.push(action.payload);
     },
+
     updateProject: (state, action: PayloadAction<Project>) => {
-      if (state.projects) {
-        const index = state.projects.findIndex(
-          (project) => project.project_id === action.payload.project_id
-        );
-        if (index !== -1) {
-          state.projects[index] = action.payload;
-        }
+      const index = state.projects.findIndex(
+        (project) => project.project_id === action.payload.project_id
+      );
+      if (index !== -1) {
+        state.projects[index] = action.payload;
       }
     },
     removeProject: (state, action: PayloadAction<number>) => {
-      if (state.projects) {
-        const index = state.projects.findIndex(
-          (project) => project.project_id === action.payload
-        );
-        if (index !== -1) {
-          state.projects.splice(index, 1);
-        }
+      const index = state.projects.findIndex(
+        (project) => project.project_id === action.payload
+      );
+      if (index !== -1) {
+        state.projects.splice(index, 1);
       }
     },
   },

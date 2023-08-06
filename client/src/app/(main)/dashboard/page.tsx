@@ -4,11 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../store';
 import { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from '../../../lib/ThemeContext';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { autoLogin } from '../../pages/api/users';
+import { autoLogin, getProjectsForUser } from '../../pages/api/users';
 import { getNotificationsForUser } from '../../pages/api/notifications';
 import DashboardNav from '../../components/Nav/DashboardNav';
+import HomeView from '../../components/Dashboard/HomeView';
+import { Project } from '../../../services/features/projectSlice';
 
 //types
 type activeTab = 'projects' | 'favorites' | 'worked-on';
@@ -16,6 +17,7 @@ type activeTab = 'projects' | 'favorites' | 'worked-on';
 export default function Dashboard() {
   const [active, setActive] = useState<activeTab>('projects');
   const user = useSelector((state: RootState) => state.user);
+  const projects = useSelector((state: RootState) => state.project.projects);
   const { theme } = useContext(ThemeContext);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
@@ -32,7 +34,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (user.user) {
-      dispatch(getNotificationsForUser(user?.user?.user_id));
+      const userId = user?.user?.user_id;
+      dispatch(getNotificationsForUser(userId));
+      dispatch(getProjectsForUser(userId));
     }
   }, [user, dispatch]);
 
@@ -40,6 +44,9 @@ export default function Dashboard() {
     return (
       <section className='dashboard'>
         <DashboardNav active={active} setActive={setActive} />
+        <div className='dashboard__web-container'>
+          <HomeView projects={projects} workedOn={null} />
+        </div>
       </section>
     );
   } else {
