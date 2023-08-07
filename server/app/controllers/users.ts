@@ -297,3 +297,27 @@ export const getUserProjects = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Error retrieving user projects' });
   }
 };
+
+// GET /api/users/taks/:id
+// Description: Get all tasks of a specific user
+export const getUserTasks = async (req: Request, res: Response) => {
+  const { id: stringId } = req.params;
+  const userId = parseInt(stringId);
+
+  if (!userId) {
+    return res.status(400).json({ error: 'User ID not provided' });
+  }
+
+  try {
+    const tasks = await Task.findAll({
+      where: {
+        assigned_user_id: userId,
+      },
+    });
+
+    return res.status(200).json({ tasks });
+  } catch (error) {
+    console.error("Error fetching user's tasks:", error);
+    return res.status(500).json({ error: 'Error fetching tasks for user' });
+  }
+};

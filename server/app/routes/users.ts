@@ -5,6 +5,7 @@ import {
   getAllUsers,
   getUserById,
   getUserProjects,
+  getUserTasks,
   getUserTeams,
   loginUser,
   logoutUser,
@@ -19,6 +20,7 @@ userRouter.get('/', getAllUsers);
 userRouter.get('/:id', getUserById);
 userRouter.get('/teams/:id', getUserTeams);
 userRouter.get('/projects/:id', getUserProjects);
+userRouter.get('/tasks/:id', getUserTasks);
 userRouter.post('/newuser-auth', checkAuthStatus);
 userRouter.post('/register', registerUser);
 userRouter.post('/login', loginUser);
