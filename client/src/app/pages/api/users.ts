@@ -2,6 +2,7 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
 import { Dispatch } from '@reduxjs/toolkit';
 import { loginSuccess } from '../../../services/features/userSlice';
 import { Project, setProjects } from '../../../services/features/projectSlice';
+import { Task } from './tasks';
 
 const baseUrl = 'http://localhost:3001/api/users';
 const headers = { 'Content-Type': 'application/json' };
@@ -115,3 +116,25 @@ export function getProjectsForUser(userId: number) {
     }
   };
 }
+
+export const getUserTasks = async (userId: number): Promise<Task[]> => {
+  try {
+    const response = await fetch(`${baseUrl}/tasks/${userId}`);
+    if (!response.ok) {
+      throw new Error('Failed to fetch tasks for user');
+    }
+    const resBody = await response.json();
+    let tasks: Task[] = resBody.tasks;
+
+    // Sorting tasks by due date
+    tasks = tasks.sort(
+      (a: Task, b: Task) =>
+        new Date(a.due_date).getTime() - new Date(b.due_date).getTime()
+    );
+
+    return tasks;
+  } catch (error) {
+    console.error('Error fetching tasks for user:', error);
+    throw error;
+  }
+};
