@@ -10,3 +10,11 @@ export const removeSymbolsFromPath = (str: string): string => {
   const capitalized = withSpace.charAt(0).toUpperCase() + withSpace.slice(1);
   return capitalized;
 };
+
+export const shuffleArray = <T>(array: T[]): T[] => {
+  const shuffledArray = [...array];
+  return shuffledArray
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((item) => item.value);
+};
