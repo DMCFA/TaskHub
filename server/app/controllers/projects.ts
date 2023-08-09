@@ -10,7 +10,7 @@ export const getAllProjects = async (req: Request, res: Response) => {
   try {
     const projects = await Project.findAll();
 
-    res.status(200).json({ projects });
+    res.status(200).json(projects);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error retrieving projects' });
