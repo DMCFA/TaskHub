@@ -60,6 +60,10 @@ const User = sequelize.define<UserInstance>(
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    avatar: {
+      type: DataTypes.STRING(512),
+      allowNull: true,
+    },
   },
   { timestamps: false }
 );

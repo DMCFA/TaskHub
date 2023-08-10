@@ -10,6 +10,7 @@ export interface UserAttributes {
   created_on: Date;
   last_login: Date | null;
   is_admin: boolean;
+  avatar: string | null;
   projects?: ProjectAttributes[];
 }
 

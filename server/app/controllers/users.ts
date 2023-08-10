@@ -76,6 +76,7 @@ export const registerUser = async (req: Request, res: Response) => {
       password: hashedPassword,
       created_on: new Date(),
       last_login: null,
+      avatar: null,
     } as UserAttributes);
 
     const userInstance = newUser as UserInstance;
@@ -156,7 +157,7 @@ export const logoutUser = async (req: Request, res: Response) => {
 //Description: Update user properties
 export const updateUser = async (req: Request, res: Response) => {
   try {
-    const { username, email, fname, password } = req.body;
+    const { username, email, fname, password, avatar } = req.body;
 
     const user = await User.findByPk(req.params.id);
 
@@ -168,6 +169,7 @@ export const updateUser = async (req: Request, res: Response) => {
     user.username = username ?? user.username;
     user.fname = fname ?? user.fname;
     user.email = email ?? user.email;
+    user.avatar = avatar ?? user.avatar;
 
     if (password) {
       user.password = await bcrypt.hash(password, 10);
