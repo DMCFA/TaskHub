@@ -3,7 +3,7 @@ const headers = { 'Content-Type': 'application/json' };
 
 type taskPriority = 'Urgent' | 'High' | 'Standard' | 'Low';
 
-type taskStatus =
+export type taskStatus =
   | 'Pending'
   | 'In Progress'
   | 'Completed'

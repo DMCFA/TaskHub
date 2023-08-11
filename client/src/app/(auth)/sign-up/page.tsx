@@ -16,7 +16,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useDispatch } from 'react-redux';
-import { removeAfterUnderscore } from '../../../lib/stringManipulation';
+import { removeAfterUnderscore } from '../../../lib/utilFunctions';
 import { registerUser } from '../../pages/api/users';
 import { AppDispatch } from '../../store';
 import { signupSuccess } from '../../../services/features/userSlice';

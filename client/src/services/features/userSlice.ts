@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 
-interface User {
+export interface User {
   user_id: number;
   username: string;
   fname: string;
@@ -9,6 +9,7 @@ interface User {
   created_on: Date;
   last_login: Date | null;
   is_admin: boolean;
+  avatar: string | null;
 }
 
 interface UserState {

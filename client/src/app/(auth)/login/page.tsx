@@ -139,7 +139,6 @@ export default function Login() {
 
       //fetch
       const user = await loginUser(data);
-      console.log(user);
       if (user) {
         dispatch(loginSuccess(user));
         router.push('/dashboard');

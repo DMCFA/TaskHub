@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+import { Task } from '../../app/pages/api/tasks';
 
 export interface Project {
   type: 'project';
@@ -12,6 +13,7 @@ export interface Project {
   team_id: number;
   created_on: Date;
   updated_on: Date;
+  tasks?: Task[];
 }
 
 export interface ProjectState {
