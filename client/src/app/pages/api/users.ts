@@ -1,6 +1,6 @@
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context';
 import { Dispatch } from '@reduxjs/toolkit';
-import { loginSuccess } from '../../../services/features/userSlice';
+import { User, loginSuccess } from '../../../services/features/userSlice';
 import { Project, setProjects } from '../../../services/features/projectSlice';
 import { Task } from './tasks';
 
@@ -136,5 +136,19 @@ export const getUserTasks = async (userId: number): Promise<Task[]> => {
   } catch (error) {
     console.error('Error fetching tasks for user:', error);
     throw error;
+  }
+};
+
+export const getUserAvatar = async (userId: number): Promise<string | null> => {
+  try {
+    const res = await fetch(`${baseUrl}/${userId}`);
+    if (!res.ok) {
+      throw new Error('Error getting user');
+    }
+    const user: User = await res.json();
+    return user.avatar;
+  } catch (error) {
+    console.error('Error getting user', error);
+    return null;
   }
 };
