@@ -291,7 +291,14 @@ export const getUserProjects = async (req: Request, res: Response) => {
     }
 
     // Get all projects associated with the user
-    const projects = await user.getProjects();
+    const projects = await user.getProjects({
+      include: [
+        {
+          model: Task,
+          as: 'tasks',
+        },
+      ],
+    });
 
     res.status(200).json(projects);
   } catch (error) {

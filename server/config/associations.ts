@@ -46,4 +46,14 @@ Project.belongsToMany(User, {
   foreignKey: 'project_id',
 });
 
+Task.belongsTo(Project, {
+  foreignKey: 'project_id',
+  as: 'project',
+});
+
+Project.hasMany(Task, {
+  foreignKey: 'project_id',
+  as: 'tasks',
+});
+
 export { User, Task, Comment, Team, Project };

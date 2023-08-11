@@ -1,4 +1,4 @@
-import { Model } from 'sequelize';
+import { Model, FindOptions } from 'sequelize';
 import { ProjectAttributes } from './Project';
 
 export interface UserAttributes {
@@ -16,6 +16,6 @@ export interface UserAttributes {
 
 export interface UserInstance extends Model<UserAttributes>, UserAttributes {
   isValidPassword: (password: string) => Promise<boolean>;
-  getProjects: () => Promise<ProjectAttributes[]>;
+  getProjects: (options?: FindOptions) => Promise<ProjectAttributes[]>;
   token: string;
 }
