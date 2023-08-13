@@ -3,6 +3,7 @@ import Project from '../models/Project';
 import UserTeam from '../models/UserTeam';
 import UserProject from '../models/UserProject';
 import User from '../models/User';
+import Task from '../models/Task';
 
 // GET /api/projects
 // Description: Get all projects
@@ -23,13 +24,20 @@ export const getProjectById = async (req: Request, res: Response) => {
   const projectId = parseInt(req.params.id);
 
   try {
-    const project = await Project.findByPk(projectId);
+    const project = await Project.findByPk(projectId, {
+      include: [
+        {
+          model: Task,
+          as: 'tasks',
+        },
+      ],
+    });
 
     if (!project) {
       return res.status(404).json({ error: 'Project not found' });
     }
 
-    res.status(200).json({ project });
+    res.status(200).json(project);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error retrieving project' });
