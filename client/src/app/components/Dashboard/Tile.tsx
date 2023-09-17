@@ -38,13 +38,13 @@ export default function Tile({ data, index }: TileProps) {
     <Card variant='outlined' className='tile'>
       <CardContent className='tile__container'>
         <div className='tile__icons'>
-          <Icon>
+          <Icon fontSize='large'>
             {index % 2 === 0 ? <MdOutlineWork /> : <BsFileBarGraphFill />}
           </Icon>
-          <Icon>
+          <Icon fontSize='large'>
             {Math.random() < 0.5 ? <AiOutlineStar /> : <AiFillStar />}
           </Icon>
-          <Icon sx={{ cursor: 'pointer' }}>
+          <Icon fontSize='large' sx={{ cursor: 'pointer' }}>
             <BsThreeDots />
           </Icon>
         </div>
@@ -54,7 +54,7 @@ export default function Tile({ data, index }: TileProps) {
           <Typography
             variant='h5'
             component='div'
-            align='center'
+            align='left'
             style={{ margin: '16px 0' }}
           >
             {title}
@@ -68,7 +68,7 @@ export default function Tile({ data, index }: TileProps) {
               <p className='tile__detail-name'>Tasks in Progress</p>
               <p className='tile__detail-value'>{tasksInProgress}</p>
             </div>
-            <div className='tile__detail--last'>
+            <div className='tile__detail tile__detail--last'>
               <p className='tile__detail-name'>Tasks Completed</p>
               <p className='tile__detail-value'>{tasksCompleted}</p>
             </div>
@@ -81,7 +81,7 @@ export default function Tile({ data, index }: TileProps) {
                 {(data as Task).subtasks?.length}
               </p>
             </div>
-            <div className='tile__detail--last'>
+            <div className='tile__detail tile__detail--last'>
               <p className='tile__detail-name'>Time Left</p>
               <p className='tile__detail-value'>
                 {getTimeLeft((data as Task).due_date)}
